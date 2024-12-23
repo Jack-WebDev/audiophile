@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 export default function Hero() {
   return (
     <motion.div
-      className="bg-[url('/assets/home/mobile/image-header.jpg')] bg-contain h-screen bg-no-repeat flex flex-col justify-center items-center text-center md:bg-[url('/assets/home/tablet/image-header.jpg')] lg:bg-[url('/assets/home/desktop/image-hero.jpg')] lg:h-[90vh] lg:w-screen lg:bg-top xl:bg-bottom lg:text-start"
+      className="bg-[url('/assets/home/mobile/image-header.jpg')] bg-contain h-[80vh] bg-no-repeat flex flex-col justify-center items-center text-center md:bg-[url('/assets/home/tablet/image-header.jpg')] lg:bg-[url('/assets/home/desktop/image-hero.jpg')] lg:h-[90vh] lg:w-screen lg:bg-top xl:bg-bottom lg:text-start"
       style={{
         backgroundSize: "100vw",
       }}
@@ -16,7 +16,7 @@ export default function Hero() {
       transition={{ duration: 1 }}
     >
       <motion.div
-        className="grid gap-y-8 relative top-[-23%] md:top-[-15%] px-8 lg:left-[-5%]"
+        className="grid gap-y-8 relative top-[-15%] md:top-[-15%] px-8 lg:left-[-5%]"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
@@ -38,8 +38,7 @@ export default function Hero() {
           XX99 Mark II Headphones
         </motion.h2>
         <motion.p
-          className="text-white text-md font-light md:w-[60%] mx-auto lg:w-1/2"
-          style={{ marginInline: "inherit" }}
+          className="text-white text-md font-light md:w-[60%] mx-auto md:mx-auto lg:w-1/2 lg:mx-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.3 }}
