@@ -1,22 +1,15 @@
 "use client";
-import { scan } from "react-scan";
 
 import { useState } from "react";
-import { useSelectedLayoutSegment } from "next/navigation";
-
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, Menu, X } from "lucide-react";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const activeSegment = useSelectedLayoutSegment();
-  // if (typeof window !== "undefined") {
-  //   scan({
-  //     enabled: true,
-  //     log: true,
-  //   });
-  // }
+  const pathname = usePathname();
+  const activeSegment = pathname === "/" ? null : pathname.split("/")[1];
 
   const links = [
     { href: "/", label: "Home", segment: null },
@@ -27,7 +20,7 @@ export default function NavBar() {
 
   return (
     <div className="bg-black">
-      <div className="flex justify-between items-center bg-black text-white py-8 px-4 md:px-8 xl:border-b border-gray-200 xl:w-1/2 mx-auto">
+      <div className="flex justify-between items-center bg-black text-white py-8 px-4 md:px-8 xl:border-b border-gray-100 xl:w-1/2 mx-auto">
         <button
           className="md:hidden text-white text-2xl"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
