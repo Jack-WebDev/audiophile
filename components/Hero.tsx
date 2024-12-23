@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 export default function Hero() {
   return (
     <motion.div
-      className="bg-[url('/assets/home/mobile/image-header.jpg')] bg-contain h-[80vh] bg-no-repeat flex flex-col justify-center items-center text-center md:bg-[url('/assets/home/tablet/image-header.jpg')] lg:bg-[url('/assets/home/desktop/image-hero.jpg')] lg:h-[90vh] lg:w-screen lg:bg-top xl:bg-bottom lg:text-start"
+      className="bg-[url('/assets/home/mobile/image-header.jpg')] bg-contain h-[80vh] bg-no-repeat flex flex-col justify-center items-center text-center md:bg-[url('/assets/home/tablet/image-header.jpg')] lg:bg-[url('/assets/home/desktop/image-hero.jpg')] lg:h-[90vh] lg:w-[99.2vw] lg:bg-top xl:bg-bottom lg:text-start"
       style={{
         backgroundSize: "100vw",
       }}
