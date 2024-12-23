@@ -1,4 +1,5 @@
 "use client";
+import { scan } from "react-scan";
 
 import { useState } from "react";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -10,6 +11,12 @@ import { ShoppingBag, Menu, X } from "lucide-react";
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const activeSegment = useSelectedLayoutSegment();
+  // if (typeof window !== "undefined") {
+  //   scan({
+  //     enabled: true,
+  //     log: true,
+  //   });
+  // }
 
   const links = [
     { href: "/", label: "Home", segment: null },
@@ -37,7 +44,7 @@ export default function NavBar() {
         <ul
           className={`${
             isMobileMenuOpen ? "grid" : "hidden"
-          } absolute md:relative translate-y-28 md:translate-y-0 ease-in-out right-0 text-center left-0 w-full md:w-auto bg-black md:bg-transparent md:flex md:items-center gap-x-8 p-4 md:p-0`}
+          } absolute md:relative translate-y-28 md:translate-y-0 ease-in-out right-0 text-center left-0 w-full md:w-auto bg-black md:bg-transparent md:flex md:items-center gap-x-8 p-4 md:p-0 z-10`}
         >
           {links.map((link) => (
             <li key={link.href} className="my-2 md:my-0">
