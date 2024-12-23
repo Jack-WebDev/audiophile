@@ -1,3 +1,4 @@
+import CTA from "@/components/CTA";
 import Hero from "@/components/Hero";
 import NavBar from "@/components/NavBar";
 import OptionProducts from "@/components/OptionProducts";
@@ -14,6 +15,7 @@ export default function Home() {
       <Speaker1 />
       <Speaker2 />
       <Earphones />
+      <CTA />
     </div>
   );
 }
