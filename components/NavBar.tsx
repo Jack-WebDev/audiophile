@@ -4,12 +4,30 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, Trash2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { useCart } from "@/context/CartContext";
+import { Button } from "./ui/button";
 
 export default function NavBar() {
+  const { state, dispatch } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const activeSegment = pathname === "/" ? null : pathname.split("/")[1];
+
+  const calculateTotal = () => {
+    return state.items.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
 
   const links = [
     { href: "/", label: "Home", segment: null },
@@ -58,7 +76,125 @@ export default function NavBar() {
         </ul>
 
         <div>
-          <ShoppingBag />
+          <Dialog>
+            <DialogTrigger asChild>
+              <div className="relative cursor-pointer">
+                <ShoppingBag className="w-6 h-6 text-gray-700" />
+                {state.items.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                    {state.items.length}
+                  </span>
+                )}
+              </div>
+            </DialogTrigger>
+
+            <DialogContent className="sm:max-w-[60%] bg-white rounded-xl p-6 shadow-lg overflow-hidden">
+              <div>
+                <DialogHeader className="flex flex-row items-center justify-between">
+                  <DialogTitle className="text-xl font-bold">
+                    Your Cart ({state.items.length})
+                  </DialogTitle>
+                </DialogHeader>
+
+                <div className="mt-4 space-y-4">
+                  {state.items.length === 0 ? (
+                    <p className="text-gray-500 text-center">
+                      Your cart is empty.
+                    </p>
+                  ) : (
+                    state.items.map((item) => (
+                      <div
+                        key={item.slug}
+                        className="flex items-center justify-between p-4 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition-all"
+                      >
+                        <div className="flex items-center gap-4">
+                          <Image
+                            src={item.image.thumbnail}
+                            alt={item.name}
+                            width={50}
+                            height={50}
+                            className="rounded-lg"
+                          />
+                          <div className="flex flex-col">
+                            <p className="font-medium text-gray-800">
+                              {item.name}
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              Quantity: {item.quantity}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                            onClick={() =>
+                              dispatch({
+                                type: "UPDATE_QUANTITY",
+                                payload: {
+                                  slug: item.slug,
+                                  quantity: item.quantity - 1,
+                                },
+                              })
+                            }
+                          >
+                            -
+                          </button>
+                          <span className="px-2">{item.quantity}</span>
+                          <button
+                            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                            onClick={() =>
+                              dispatch({
+                                type: "UPDATE_QUANTITY",
+                                payload: {
+                                  slug: item.slug,
+                                  quantity: item.quantity + 1,
+                                },
+                              })
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                        <p className="font-semibold text-gray-800">
+                          R{item.price * item.quantity}
+                        </p>
+                        <Trash2
+                          className="w-4 h-4 text-red-500 hover:text-red-600 cursor-pointer"
+                          onClick={() =>
+                            dispatch({
+                              type: "REMOVE_ITEM",
+                              payload: { slug: item.slug },
+                            })
+                          }
+                        />
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {state.items.length > 0 && (
+                  <div className="mt-6 border-t pt-4">
+                    <div className="flex justify-between text-lg font-bold">
+                      <span>Total:</span>
+                      <span>R{calculateTotal()}</span>
+                    </div>
+                  </div>
+                )}
+
+                <DialogFooter className="mt-6 flex sm:justify-between items-center w-full">
+                  <button
+                    className="text-sm font-semibold text-red-500 underline"
+                    onClick={() => dispatch({ type: "CLEAR_CART" })}
+                  >
+                    Clear All
+                  </button>
+                  <button className="bg-primary text-white py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:bg-primary/90 transition-all">
+                    CHECKOUT
+                  </button>
+                </DialogFooter>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>
