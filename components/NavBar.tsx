@@ -27,12 +27,14 @@ export default function NavBar() {
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
-        <Image
-          src="/assets/shared/desktop/logo.svg"
-          alt="logo"
-          width={100}
-          height={100}
-        />
+        <Link href="/">
+          <Image
+            src="/assets/shared/desktop/logo.svg"
+            alt="logo"
+            width={100}
+            height={100}
+          />
+        </Link>
 
         <ul
           className={`${
