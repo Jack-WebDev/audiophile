@@ -13,7 +13,6 @@ export default function Speaker2() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        {/* Background with responsive images */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/assets/home/mobile/image-speaker-zx7.jpg')] 
             md:bg-[url('/assets/home/tablet/image-speaker-zx7.jpg')] 
@@ -21,11 +20,9 @@ export default function Speaker2() {
             bg-no-repeat bg-cover bg-center
             transition-transform duration-700 hover:scale-105" 
           />
-          {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
         </div>
 
-        {/* Content */}
         <motion.div 
           className="relative h-full flex items-center"
           initial={{ x: -50, opacity: 0 }}

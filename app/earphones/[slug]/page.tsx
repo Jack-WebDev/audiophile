@@ -48,51 +48,50 @@ export default function Page() {
     );
   }
 
-    const addToCart = () => {
-      if (count === 0) return;
-  
-      const existingItem = state.items.find((item) => item.name === product.name);
-  
-      const cartItem: CartItem = {
-        slug: existingItem?.slug ?? product.slug,
-        category: product.category,
-        name: product.name,
-        price: product.price,
-        quantity: count,
-        image: {
-          thumbnail: product.image.mobile,
-          mobile: product.image.mobile,
-          tablet: product.image.tablet,
-          desktop: product.image.desktop,
-        },
-      };
-  
-      if (existingItem) {
-        dispatch({
-          type: "UPDATE_QUANTITY",
-          payload: { slug: existingItem.slug, quantity: count },
-        });
-      } else {
-        dispatch({
-          type: "ADD_ITEM",
-          payload: cartItem,
-        });
-      }
+  const addToCart = () => {
+    if (count === 0) return;
+
+    const existingItem = state.items.find((item) => item.name === product.name);
+
+    const cartItem: CartItem = {
+      slug: existingItem?.slug ?? product.slug,
+      category: product.category,
+      name: product.name,
+      price: product.price,
+      quantity: count,
+      image: {
+        thumbnail: product.image.mobile,
+        mobile: product.image.mobile,
+        tablet: product.image.tablet,
+        desktop: product.image.desktop,
+      },
     };
-  
-    const addItem = () => {
-      setCount((prevCount) => prevCount + 1);
-    };
-  
-    const removeItem = () => {
-      setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
-    };
+
+    if (existingItem) {
+      dispatch({
+        type: "UPDATE_QUANTITY",
+        payload: { slug: existingItem.slug, quantity: count },
+      });
+    } else {
+      dispatch({
+        type: "ADD_ITEM",
+        payload: cartItem,
+      });
+    }
+  };
+
+  const addItem = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+
+  const removeItem = () => {
+    setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
+  };
 
   return (
     <motion.div initial="hidden" animate="visible" variants={fadeIn}>
       <NavBar />
       <div className="grid gap-y-12 px-4 md:px-8 max-w-7xl mx-auto">
-        {/* Back Button */}
         <motion.button
           onClick={() => router.back()}
           className="mt-12 text-gray-400 hover:text-gray-600 flex items-center gap-2 group"
@@ -103,12 +102,10 @@ export default function Page() {
           GO BACK
         </motion.button>
 
-        {/* Product Hero Section */}
         <motion.div
           className="grid md:grid-cols-2 gap-8 items-center bg-white rounded-2xl p-6 shadow-lg"
           variants={slideUp}
         >
-          {/* Product Image */}
           <motion.div
             className="relative overflow-hidden rounded-xl"
             whileHover={{ scale: 1.02 }}
@@ -137,7 +134,6 @@ export default function Page() {
             />
           </motion.div>
 
-          {/* Product Info */}
           <motion.div className="grid gap-y-6" variants={slideUp}>
             {product.new && (
               <motion.span
@@ -203,7 +199,6 @@ export default function Page() {
           </motion.div>
         </motion.div>
 
-        {/* Features and Box Contents */}
         <motion.div className="grid md:grid-cols-2 gap-12" variants={slideUp}>
           <div className="space-y-6">
             <h3 className="text-2xl font-bold">Features</h3>
@@ -241,7 +236,6 @@ export default function Page() {
           </div>
         </motion.div>
 
-        {/* Gallery */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={slideUp}
@@ -282,7 +276,6 @@ export default function Page() {
           ))}
         </motion.div>
 
-        {/* Related Products */}
         <motion.div className="text-center space-y-8" variants={slideUp}>
           <h3 className="text-2xl font-bold">You May Also Like</h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -333,7 +326,7 @@ export default function Page() {
                       : "speakers"
                   }/${item.slug}`}
                   className="inline-block bg-primary text-white py-3 px-6 rounded-lg font-medium 
-    shadow-lg shadow-primary/20 hover:shadow-xl hover:bg-primary/90 
+    shadow-lg shadow-primary/20 hover:shadow-xl hover:bg-primary-foreground
     transition-all transform hover:scale-105"
                 >
                   SEE PRODUCT

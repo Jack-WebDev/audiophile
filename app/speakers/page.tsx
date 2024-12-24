@@ -8,12 +8,12 @@ export default function Speakers() {
     <div>
       <Header />
       <Product
-      flexDirection="lg:flex-row"
-      products={productData.filter(
+        flexDirection="lg:flex-row"
+        products={productData.filter(
           (product) => product.category === "speakers"
         )}
       />
-      <OptionProducts/>
+      <OptionProducts />
     </div>
   );
 }

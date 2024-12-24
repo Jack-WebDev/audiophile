@@ -15,7 +15,6 @@ export default function Earphones() {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        {/* Image Section */}
         <motion.div
           className="relative overflow-hidden rounded-2xl shadow-lg"
           initial={{ x: -50, opacity: 0 }}
@@ -24,7 +23,6 @@ export default function Earphones() {
           transition={{ delay: 0.2, duration: 0.6 }}
           whileHover={{ scale: 1.02 }}
         >
-          {/* Mobile Image */}
           <Image
             src="/assets/home/mobile/image-earphones-yx1.jpg"
             alt="YX1 Earphones"
@@ -32,7 +30,6 @@ export default function Earphones() {
             height={400}
             className="w-full object-cover md:hidden"
           />
-          {/* Tablet Image */}
           <Image
             src="/assets/home/tablet/image-earphones-yx1.jpg"
             alt="YX1 Earphones"
@@ -40,7 +37,6 @@ export default function Earphones() {
             height={600}
             className="hidden w-full object-cover md:block lg:hidden"
           />
-          {/* Desktop Image */}
           <Image
             src="/assets/home/desktop/image-earphones-yx1.jpg"
             alt="YX1 Earphones"
@@ -48,11 +44,9 @@ export default function Earphones() {
             height={800}
             className="hidden w-full object-cover lg:block"
           />
-          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10" />
         </motion.div>
 
-        {/* Content Section */}
         <motion.div
           className="flex flex-col items-center justify-center p-8 md:p-12 
             bg-gradient-to-br from-gray-100 to-gray-200 

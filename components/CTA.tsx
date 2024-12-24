@@ -15,7 +15,6 @@ export default function CTA() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        {/* Image Section */}
         <motion.div 
           className="order-1 lg:order-2"
           initial={{ x: 100, opacity: 0 }}
@@ -24,7 +23,6 @@ export default function CTA() {
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <div className="relative rounded-2xl overflow-hidden shadow-xl">
-            {/* Mobile Image */}
             <Image
               src="/assets/shared/mobile/image-best-gear.jpg"
               alt="Best Gear"
@@ -32,7 +30,6 @@ export default function CTA() {
               height={300}
               className="w-full object-cover md:hidden"
             />
-            {/* Tablet Image */}
             <Image
               src="/assets/shared/tablet/image-best-gear.jpg"
               alt="Best Gear"
@@ -40,7 +37,6 @@ export default function CTA() {
               height={400}
               className="hidden w-full object-cover md:block lg:hidden"
             />
-            {/* Desktop Image */}
             <Image
               src="/assets/shared/desktop/image-best-gear.jpg"
               alt="Best Gear"
@@ -48,12 +44,10 @@ export default function CTA() {
               height={500}
               className="hidden w-full object-cover lg:block"
             />
-            {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
           </div>
         </motion.div>
 
-        {/* Content Section */}
         <motion.div 
           className="order-2 lg:order-1 text-center lg:text-left"
           initial={{ x: -100, opacity: 0 }}

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import {motion, useInView} from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 type ProductProps = {
@@ -26,16 +26,16 @@ type ProductCardProps = {
 };
 
 interface StyleProps extends ProductProps {
-  flexDirection?: string; // Optional with default
+  flexDirection?: string;
 }
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 };
 
 const staggerChildren = {
@@ -43,9 +43,9 @@ const staggerChildren = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 export default function Product({
@@ -56,14 +56,14 @@ export default function Product({
   flexDirection?: string;
 }) {
   return (
-    <motion.div 
+    <motion.div
       className="grid gap-y-16 py-8"
       initial="hidden"
       animate="visible"
       variants={staggerChildren}
     >
       {products.map((product, index) => (
-        <ProductCard 
+        <ProductCard
           key={index}
           product={product}
           index={index}
@@ -74,7 +74,7 @@ export default function Product({
   );
 }
 
-const ProductCard = ({ product, index, flexDirection }:ProductCardProps) => {
+const ProductCard = ({ product, index, flexDirection }: ProductCardProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -90,16 +90,14 @@ const ProductCard = ({ product, index, flexDirection }:ProductCardProps) => {
       style={{
         transform: isInView ? "none" : "translateY(50px)",
         opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
       }}
     >
-      {/* Responsive Images */}
-      <motion.div 
+      <motion.div
         className="lg:flex-shrink-0 relative overflow-hidden group"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Mobile Image */}
         <div className="md:hidden">
           <Image
             src={product.image.mobile}
@@ -110,7 +108,6 @@ const ProductCard = ({ product, index, flexDirection }:ProductCardProps) => {
               group-hover:scale-105 transition-transform duration-500"
           />
         </div>
-        {/* Tablet Image */}
         <div className="hidden md:block lg:hidden">
           <Image
             src={product.image.tablet}
@@ -121,7 +118,6 @@ const ProductCard = ({ product, index, flexDirection }:ProductCardProps) => {
               group-hover:scale-105 transition-transform duration-500"
           />
         </div>
-        {/* Desktop Image */}
         <div className="hidden lg:block">
           <Image
             src={product.image.desktop}
@@ -134,13 +130,12 @@ const ProductCard = ({ product, index, flexDirection }:ProductCardProps) => {
         </div>
       </motion.div>
 
-      {/* Product Details */}
-      <motion.div 
+      <motion.div
         className="grid gap-y-6 p-8 text-center lg:text-left"
         variants={fadeInUp}
       >
         {product.new && (
-          <motion.h2 
+          <motion.h2
             className="text-primary tracking-[.7rem] font-medium"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -155,9 +150,7 @@ const ProductCard = ({ product, index, flexDirection }:ProductCardProps) => {
         <p className="text-sm text-gray-600 lg:text-base leading-relaxed">
           {product.description}
         </p>
-        <motion.div
-          whileTap={{ scale: 0.95 }}
-        >
+        <motion.div whileTap={{ scale: 0.95 }}>
           <Link
             href={`/${product.category}/${product.slug}`}
             className="inline-block bg-gradient-to-r from-primary to-primary-foreground 
@@ -171,4 +164,4 @@ const ProductCard = ({ product, index, flexDirection }:ProductCardProps) => {
       </motion.div>
     </motion.div>
   );
-}
+};

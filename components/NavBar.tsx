@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, Menu, X, Trash2 } from "lucide-react";
@@ -14,10 +14,10 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { useCart } from "@/context/CartContext";
-import { Button } from "./ui/button";
 
 export default function NavBar() {
   const { state, dispatch } = useCart();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const activeSegment = pathname === "/" ? null : pathname.split("/")[1];
@@ -31,7 +31,7 @@ export default function NavBar() {
 
   const links = [
     { href: "/", label: "Home", segment: null },
-    { href: "/headphones", label: "Headphone", segment: "headphones" },
+    { href: "/headphones", label: "Headphones", segment: "headphones" },
     { href: "/speakers", label: "Speakers", segment: "speakers" },
     { href: "/earphones", label: "Earphones", segment: "earphones" },
   ];
@@ -188,7 +188,10 @@ export default function NavBar() {
                   >
                     Clear All
                   </button>
-                  <button className="bg-primary text-white py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:bg-primary/90 transition-all">
+                  <button
+                    className="bg-primary text-white py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:bg-primary-foregroundtransition-all"
+                    onClick={() => router.push("/checkout")}
+                  >
                     CHECKOUT
                   </button>
                 </DialogFooter>

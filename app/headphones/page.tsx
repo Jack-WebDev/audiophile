@@ -9,13 +9,13 @@ export default function Headphones() {
     <div>
       <Header />
       <Product
-      flexDirection="lg:flex-row"
+        flexDirection="lg:flex-row"
         products={productData.filter(
           (product) => product.category === "headphones"
         )}
       />
-      <OptionProducts/>
-      <CTA/>
+      <OptionProducts />
+      <CTA />
     </div>
   );
 }
